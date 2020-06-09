@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D929731C248FFB7B00718D48 /* RegistrationUserVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D929731B248FFB7B00718D48 /* RegistrationUserVM.swift */; };
 		D99BEF98248EA1E400749087 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99BEF97248EA1E400749087 /* AppDelegate.swift */; };
 		D99BEF9A248EA1E400749087 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99BEF99248EA1E400749087 /* SceneDelegate.swift */; };
 		D99BEF9C248EA1E400749087 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99BEF9B248EA1E400749087 /* ContentView.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D929731B248FFB7B00718D48 /* RegistrationUserVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationUserVM.swift; sourceTree = "<group>"; };
 		D99BEF94248EA1E400749087 /* SignIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D99BEF97248EA1E400749087 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D99BEF99248EA1E400749087 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				D99BEF97248EA1E400749087 /* AppDelegate.swift */,
 				D99BEF99248EA1E400749087 /* SceneDelegate.swift */,
 				D99BEF9B248EA1E400749087 /* ContentView.swift */,
+				D929731B248FFB7B00718D48 /* RegistrationUserVM.swift */,
 				D99BEF9D248EA1E600749087 /* Assets.xcassets */,
 				D99BEFA2248EA1E600749087 /* LaunchScreen.storyboard */,
 				D99BEFA5248EA1E600749087 /* Info.plist */,
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D929731C248FFB7B00718D48 /* RegistrationUserVM.swift in Sources */,
 				D99BEF98248EA1E400749087 /* AppDelegate.swift in Sources */,
 				D99BEF9A248EA1E400749087 /* SceneDelegate.swift in Sources */,
 				D99BEF9C248EA1E400749087 /* ContentView.swift in Sources */,

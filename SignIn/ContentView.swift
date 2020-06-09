@@ -10,9 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var username: String = ""
-    @State private var password: String = ""
-    @State private var confirmPassword: String = ""
+    @ObservedObject private var registerUser = RegistrationUserVM()
     
     var body: some View {
         VStack {
@@ -23,15 +21,14 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .bold()
             
-            SingleFormView(valueUser: $username, placeholder: "Username", isSecureField: false)
-            ValidationFormView(reason: "It's at least 6 characters.", reasonCheck: true)
+            SingleFormView(valueUser: $registerUser.username, placeholder: "Username", isSecureField: false)
+            ValidationFormView(reason: "It's at least 6 characters.", reasonCheck: registerUser.usernameLengthValid)
+            SingleFormView(valueUser: $registerUser.password, placeholder: "Password", isSecureField: true)
+            ValidationFormView(reason: "It's at least 8 characters.", reasonCheck: registerUser.passwordLengthValid)
+            ValidationFormView(reason: "Make sure including a number, a lowercase and an uppercase letter.", reasonCheck: registerUser.passwordUpperLowercassedValid)
             
-            SingleFormView(valueUser: $password, placeholder: "Password", isSecureField: true)
-            ValidationFormView(reason: "It's at least 8 characters.", reasonCheck: false)
-            ValidationFormView(reason: "Make sure including a number, a lowercase and an uppercase letter.", reasonCheck: false)
-            
-            SingleFormView(valueUser: $confirmPassword, placeholder: "Confirm Password", isSecureField: true)
-            ValidationFormView(reason: "Match Password", reasonCheck: false)
+            SingleFormView(valueUser: $registerUser.confirmPassword, placeholder: "Confirm Password", isSecureField: true)
+            ValidationFormView(reason: "Match Password", reasonCheck: registerUser.passwordsMatch)
             
             VStack {
                 Button(action: {
