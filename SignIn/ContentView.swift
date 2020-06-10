@@ -10,56 +10,76 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var isCreateAccount = true
     @ObservedObject private var registerUser = RegistrationUserVM()
     
     var body: some View {
-        VStack {
-            Text("Login")
-                .font(.headline)
-                .foregroundColor(.secondary)
-            Text("Create Your Account")
-                .font(.largeTitle)
-                .bold()
-            
-            SingleFormView(valueUser: $registerUser.username, placeholder: "Username", isSecureField: false)
-            ValidationFormView(reason: "It's at least 6 characters.", reasonCheck: registerUser.usernameLengthValid)
-            SingleFormView(valueUser: $registerUser.password, placeholder: "Password", isSecureField: true)
-            ValidationFormView(reason: "It's at least 8 characters.", reasonCheck: registerUser.passwordLengthValid)
-            ValidationFormView(reason: "Make sure including a number, a lowercase and an uppercase letter.", reasonCheck: registerUser.passwordUpperLowercassedValid)
-            
-            SingleFormView(valueUser: $registerUser.confirmPassword, placeholder: "Confirm Password", isSecureField: true)
-            ValidationFormView(reason: "Match Password", reasonCheck: registerUser.passwordsMatch)
-            
+        NavigationView{
             VStack {
-                Button(action: {
-                    // TODO: Next View
-                }) {
-                    Text("Sign in")
-                        .font(.largeTitle)
-                        .bold()
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 30, alignment: .center)
-                        .padding()
-                        .background(LinearGradient(gradient: Gradient(colors: [.blue, .green]),
-                                                   startPoint: .trailing,
-                                                   endPoint: .leading))
-                        .cornerRadius(10)
-                }
-                HStack{
-                    Text("Have an Account?")
-                    .font(.footnote)
+                Text("Email")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                Text(isCreateAccount ? "Create Your Account" : "Login")
+                    .font(.largeTitle)
                     .bold()
+                SingleFormView(valueUser: $registerUser.username,
+                               placeholder: "Username",
+                               isSecureField: false)
+                if isCreateAccount{
+                   ValidationFormView(reason: "It's at least 6 characters.",
+                                      reasonCheck: registerUser.usernameLengthValid)
+                }
+                SingleFormView(valueUser: $registerUser.password,
+                               placeholder: "Password",
+                               isSecureField: true)
+                if isCreateAccount{
+                    ValidationFormView(reason: "It's at least 8 characters.",
+                                       reasonCheck: registerUser.passwordLengthValid)
+                    ValidationFormView(reason: "Make sure including a number, a lowercase and an uppercase letter.",
+                                       reasonCheck: registerUser.passwordUpperLowercassedValid)
+                    SingleFormView(valueUser: $registerUser.confirmPassword,
+                                   placeholder: "Confirm Password",
+                                   isSecureField: true)
+                    ValidationFormView(reason: "Match Password",
+                                       reasonCheck: registerUser.passwordsMatch)
+                }
+                VStack {
                     Button(action: {
-                        // TODO: login
+                        // TODO: Go App
                     }) {
-                        Text("Sign Up")
-                            .font(.body)
+                        Text(isCreateAccount ? "Sign Up": "Sign In")
+                            .font(.title)
                             .bold()
-                            .foregroundColor(.blue)
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 20, alignment: .center)
+                            .padding()
+                            .background(registerUserCompleted() ? Color.green : Color.red).animation(.default)
+                            .cornerRadius(10)
                     }
-                }.padding(.top, 8)
-            }.padding(.top, 30)
+                    HStack{
+                        Text(isCreateAccount ? "Do you have an Account?" : "New user?")
+                            .font(.footnote)
+                            .bold()
+                        Button(action: {
+                            self.isCreateAccount.toggle()
+                        }) {
+                            Text(isCreateAccount ? "Sign in" : "Sign up")
+                                .font(.body)
+                                .bold()
+                                .foregroundColor(.blue)
+                        }
+                    }.padding(.top, 8)
+                }.padding(.top, 60)
+                Spacer()
+            }
         }
+    }
+    
+    func registerUserCompleted() -> Bool {
+        return registerUser.usernameLengthValid &&
+               registerUser.passwordLengthValid &&
+               registerUser.passwordUpperLowercassedValid &&
+               registerUser.passwordsMatch
     }
 }
 

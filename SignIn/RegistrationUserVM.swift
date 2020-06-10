@@ -67,6 +67,4 @@ class RegistrationUserVM: ObservableObject {
             .assign(to: \.passwordsMatch, on: self)
             .store(in: &cancellableObjects)
     }
-    
-    
 }
